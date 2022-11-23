@@ -1,0 +1,73 @@
+<p class="title">Owner Details</p>
+
+<form (ngSubmit)="onSubmit(f)" #f="ngForm">
+  <div class="form-container">
+
+    <div class="form-group">
+      <label for="id">Owner #</label>
+      <input
+        type="text"
+        id="id"
+        class="form-control"
+        name="id"
+        ngModel
+        required
+        readonly
+      />
+    </div>
+
+    <div class="form-group">
+      <label for="name">Name</label>
+      <input
+        type="text"
+        id="name"
+        class="form-control"
+        name="name"
+        ngModel
+        required
+      />
+    </div>
+
+    <div class="form-group">
+      <label for="surname">Surname</label>
+      <input
+        type="text"
+        id="surname"
+        class="form-control"
+        name="surname"
+        ngModel
+        required
+      />
+    </div>
+
+    <div class="form-group">
+      <label for="phoneNumber">Phone number</label>
+      <input
+        type="text"
+        id="phoneNumber"
+        class="form-control"
+        name="phoneNumber"
+        ngModel
+        required
+        pattern="^[1-9]+[0-9]*$"
+      />
+    </div>
+
+  </div>
+
+  <div class="buttons">
+
+    <button class="action-btn" type="submit" [disabled]="!f.valid">
+      {{ editMode ? 'Update' : 'Add' }}
+    </button>
+
+    <button class="action-btn" type="button" (click)="onDelete()" *ngIf="editMode">
+      Delete
+    </button>
+
+    <button class="action-btn" type="button" (click)="onClear()">
+      Clear
+    </button>
+  </div>
+
+</form>

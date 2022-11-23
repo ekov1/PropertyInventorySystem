@@ -1,0 +1,8 @@
+<div class="sort-container" (click)="sortByKey(sortingList, key, isDesc)">
+  <div>
+    {{title}}
+  </div>
+  <i [ngClass]="isDesc ? 'fa-solid fa-arrow-up-short-wide' : 'fa-solid fa-arrow-down-short-wide'"
+    (click)="isDesc=!isDesc">
+  </i>
+</div>

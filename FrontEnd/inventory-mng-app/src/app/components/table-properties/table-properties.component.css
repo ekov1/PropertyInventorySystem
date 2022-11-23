@@ -1,0 +1,39 @@
+:host {
+  height: 100%;
+  display: flex;
+  justify-content: space-between;
+  flex-direction: column;
+}
+
+.container {
+  padding: 0;
+}
+
+.prop-container {
+  display: flex;
+  flex-direction: column;
+  gap: 1em;
+}
+
+.title {
+  margin-bottom: 1em;
+  font-weight: 600;
+  font-size: 20px;
+  cursor: default;
+}
+
+.title:hover {
+  text-shadow: 2px 2px #547e57;
+}
+
+.sort-container {
+  display: grid;
+  grid-template-columns: 50px 100px 100px 100px 100px;
+  column-gap: 1em;
+  padding: 1em;
+}
+
+.pagination {
+  display: flex;
+  justify-content: space-around;
+}

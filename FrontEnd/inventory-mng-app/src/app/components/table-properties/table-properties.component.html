@@ -1,0 +1,20 @@
+<div class="container">
+  <p class="title">All properties</p>
+  <div class="sort-container">
+    <app-sort [sortingList]="propertiesList" [key]="'propertyId'" [title]="'#'"></app-sort>
+    <app-sort [sortingList]="propertiesList" [key]="'name'" [title]="'Name'"></app-sort>
+    <app-sort [sortingList]="propertiesList" [key]="'address'" [title]="'Address'"></app-sort>
+    <app-sort [sortingList]="propertiesList" [key]="'price'" [title]="'Price'"></app-sort>
+  </div>
+  <div class="prop-container">
+    <app-property-card
+      *ngFor="let property of propertiesList | slice: (page-1) * pageSize : page * pageSize"
+      [propertyData]="property"
+      (click)="onEditProperty(property.id)">
+    </app-property-card>
+  </div>
+</div>
+<div class="pagination">
+  <ngb-pagination [(page)]="page" [pageSize]="pageSize" [collectionSize]="propertiesList.length">
+  </ngb-pagination>
+</div>

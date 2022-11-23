@@ -1,0 +1,20 @@
+<div class="container">
+  <p class="title">All owners</p>
+  <div class="sort-container">
+    <app-sort [sortingList]="ownerList" [key]="'ownerId'" [title]="'#'"></app-sort>
+    <app-sort [sortingList]="ownerList" [key]="'name'" [title]="'Name'"></app-sort>
+    <app-sort [sortingList]="ownerList" [key]="'surname'" [title]="'Surname'"></app-sort>
+    <app-sort [sortingList]="ownerList" [key]="'phone'" [title]="'Phone'"></app-sort>
+  </div>
+  <div class="owners-container">
+    <app-owner-card
+      *ngFor="let i=index,let owner of ownerList | slice: (page-1) * pageSize : page * pageSize"
+      [ownerData]="owner"
+      (click)="onEditOwner(owner.id)">
+    </app-owner-card>
+  </div>
+</div>
+<div class="pagination">
+  <ngb-pagination [(page)]="page" [pageSize]="pageSize" [collectionSize]="ownerList.length">
+  </ngb-pagination>
+</div>

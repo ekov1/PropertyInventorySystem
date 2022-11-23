@@ -1,0 +1,12 @@
+:host {
+  display: block;
+  height: 100rem;
+  width: 100%;
+  overflow: hidden;
+  background-image: url(../assets/malta-background.jpg);
+  background-position: center center;
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+  background-size:100%;
+  position: fixed;
+}

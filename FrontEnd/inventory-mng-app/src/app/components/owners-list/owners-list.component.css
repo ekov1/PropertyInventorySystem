@@ -1,0 +1,40 @@
+:host {
+  display: flex;
+  flex-direction: row;
+  max-width: var(--card-width, 1400px);
+  margin: 2em auto;
+  gap: 2em;
+  min-height: 800px;
+}
+
+.left-side,
+.right-side {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5em;
+  background-color: rgba(250, 243, 243, 0.86);
+  padding: 2em;
+  border-radius: 10px;
+}
+
+.right-side {
+  width: 70%;
+  min-width: 920px;
+}
+
+.left-side {
+  width: 30%;
+}
+
+@media screen and (max-width: 1400px) {
+  :host {
+    flex-direction: column;
+    width: 920px;
+    position: relative;
+    overflow: scroll;
+  }
+
+  .left-side {
+    width: 100%;
+  }
+}
