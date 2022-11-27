@@ -1,13 +1,11 @@
 ﻿using Models.Models;
-
-namespace DataAccess.Repository
+namespace Services.Interfaces
 {
-    public interface IPropertyRepository
+    public interface IPropertyService
     {
-        Property? GetById(Guid id);
+        Property CreateProperty(Property property);
         void Delete(Guid id);
         bool PropertyExists(Guid id);
-        Property AddPropertyWithOwners(Property property);
         ICollection<Property> GetByPhoneNumber(string phoneNumber);
     }
 }

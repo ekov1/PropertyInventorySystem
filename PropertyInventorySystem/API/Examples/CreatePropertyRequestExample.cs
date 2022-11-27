@@ -14,6 +14,7 @@ namespace API.Examples
                 Address = "adress 1",
                 Price = 100,
                 PropertyName = "Mirador de Monte Pinar",
+                RegistrationDate= DateTime.Now.Date,
                 PropertyOwners = new[] {
                     new Owner {
                         Id = Guid.NewGuid(),

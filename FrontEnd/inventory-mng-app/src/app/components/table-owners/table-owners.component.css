@@ -22,10 +22,6 @@
   cursor: default;
 }
 
-.title:hover {
-  text-shadow: 2px 2px #547e57;
-}
-
 .sort-container {
   display: grid;
   display: grid;
@@ -33,6 +29,7 @@
   padding-left: 2em;
   padding-left: 2em;
   padding-bottom: 1em;
+  font-weight: 600;
 }
 
 .pagination {

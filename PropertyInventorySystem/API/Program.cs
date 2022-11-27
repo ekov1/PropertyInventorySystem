@@ -15,17 +15,19 @@ builder.Services.AddDbContext<ApplicationDbContext>(options => options.UseSqlSer
 builder.Services.AddScoped<DbContext, ApplicationDbContext>();
 builder.Services.AddScoped<IOwnerRepository, OwnerRepository>();
 builder.Services.AddScoped<IPropertyRepository, PropertyRepository>();
-builder.Services.AddScoped<IPropertyOwnerRepository, PropertyOwnerRepository>();
+builder.Services.AddScoped<IPropertyRepository, PropertyRepository>();
 
 builder.Services.AddScoped<IOwnerService, OwnerService>();
-builder.Services.AddScoped<IPropertyOwnerService, PropertyOwnerService>();
+builder.Services.AddScoped<IPropertyService, PropertyService>();
 
 builder.Services.AddControllers();
 
 builder.Services.AddCors(options => options.AddPolicy(name: "corsPolicy",
     policy =>
     {
-        policy.WithOrigins("http://localhost:4200").AllowAnyMethod().AllowAnyOrigin();
+        policy.WithOrigins("http://localhost:4200")
+        .AllowAnyHeader()
+        .AllowAnyMethod();
     }));
 
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle

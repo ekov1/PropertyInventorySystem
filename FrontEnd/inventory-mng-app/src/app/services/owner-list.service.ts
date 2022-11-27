@@ -31,6 +31,7 @@ export class OwnerListService {
   }
 
   public getOwnerById(id: string): Observable<OwnerModel> {
+    
     return this.ownerClient
       .getOwnerById(id)
       .pipe(
@@ -59,12 +60,7 @@ export class OwnerListService {
   }
 
   deleteOwner(id: string) {
-    return this.ownerClient.deleteOwner(id)
-      .pipe(
-        map<OwnerDto, OwnerModel>((ownerDto) =>
-          this.apiService.toOwnerModel(ownerDto)
-        )
-      )
+    return this.ownerClient.deleteOwner(id);
   }
 
 }

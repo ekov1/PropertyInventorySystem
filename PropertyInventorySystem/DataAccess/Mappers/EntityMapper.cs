@@ -33,8 +33,19 @@ namespace DataAccess.Mappers
                 Address = property.Address,
                 Price = property.Price,
                 PropertyName = property.PropertyName,
-                //PropertyOwners = property.PropertyOwners,
                 RegistrationDate = property.RegistrationDate
+            };
+        }
+
+        public static Property ToProperty(this PropertyEntity propertyEntity, ICollection<Owner> owners)
+        {
+            return new Property
+            {
+                Address = propertyEntity.Address,
+                Price = propertyEntity.Price,
+                PropertyName = propertyEntity.PropertyName,
+                PropertyOwners = owners,
+                RegistrationDate = propertyEntity.RegistrationDate
             };
         }
 
@@ -45,7 +56,6 @@ namespace DataAccess.Mappers
                 Address = propertyEntity.Address,
                 Price = propertyEntity.Price,
                 PropertyName = propertyEntity.PropertyName,
-               // PropertyOwners = propertyEntity.PropertyOwners,
                 RegistrationDate = propertyEntity.RegistrationDate
             };
         }

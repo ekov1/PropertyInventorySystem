@@ -86,12 +86,19 @@ namespace DataAccess.Repository
 
         public bool OwnerExists(Guid ownerId)
         {
-            if (ownerId == Guid.Empty)
+            try
             {
-                throw new ArgumentNullException(nameof(ownerId));
-            }
+                if (ownerId == Guid.Empty)
+                {
+                    throw new ArgumentNullException(nameof(ownerId));
+                }
 
-            return _context.Owners.Any(o => o.Id == ownerId);
+                return _context.Owners.Any(o => o.Id == ownerId);
+            }
+            catch (Exception ex)
+            {
+                return false;
+            }
         }
 
         public bool OwnerExists(string phoneNumber)
@@ -128,6 +135,6 @@ namespace DataAccess.Repository
             }
         }
 
-       
+
     }
 }

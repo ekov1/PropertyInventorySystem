@@ -12,7 +12,7 @@
   display: flex;
   flex-direction: column;
   gap: 1.5em;
-  background-color: rgba(250, 243, 243, 0.86);
+  background-color: rgba(250, 243, 243, 0.66);
   padding: 2em;
   border-radius: 10px;
 }
@@ -26,7 +26,7 @@
   width: 30%;
 }
 
-@media screen and (max-width: 1400px) {
+/* @media screen and (max-width: 1400px) {
   :host {
     flex-direction: column;
     width: 920px;
@@ -37,4 +37,5 @@
   .left-side {
     width: 100%;
   }
-}
+  
+} */

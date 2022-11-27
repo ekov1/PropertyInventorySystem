@@ -1,9 +1,9 @@
-import { OwnerModel } from './../../model/owner-model';
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { NgForm } from '@angular/forms';
 import { Subscription } from 'rxjs';
-import { OwnerListService } from 'src/app/services/owner-list.service';
 import { tap } from 'rxjs/operators';
+import { OwnerListService } from 'src/app/services/owner-list.service';
+import { OwnerModel } from './../../model/owner-model';
 
 @Component({
   selector: 'app-owner-edit',
@@ -16,7 +16,7 @@ export class OwnerEditComponent implements OnInit {
 
   subscription!: Subscription;
   editMode = false;
-  editedOwnerId: string = '';
+  editedOwnerId!: string;
   editedOwner!: OwnerModel;
   property!: number;
 
@@ -26,41 +26,48 @@ export class OwnerEditComponent implements OnInit {
 
     this.subscription = this.ownerListService.startedEditing.subscribe(
       (ownerId: string) => {
-        console.log(ownerId);
-        
         this.editedOwnerId = ownerId;
-        this.editMode = true;
-        this.ownerListService.getOwnerById(ownerId).pipe(
-          tap((ownerData) => {this.editedOwner = ownerData!, console.log(ownerData) })
-        )
-        // this.editedOwner = this.ownerListService.getOwnerById(ownerId)!;
-        console.log(this.editedOwner, 'edit');
-        if (this.editedOwner) {
-          this.slForm.setValue({
-            id: this.editedOwner.id,
-            name: this.editedOwner.name,
-            surname: this.editedOwner.surname,
-            phoneNumber: this.editedOwner.phoneNumber
-          });
-        }
+
+        this.ownerListService.getOwnerById(ownerId)
+        .pipe(
+          tap(data => {
+            this.editedOwner = data;
+            this.editMode = true;
+            this.slForm.setValue({
+              id: this.editedOwner.id,
+              name: this.editedOwner.name,
+              surname: this.editedOwner.surname,
+              phoneNumber: this.editedOwner.phoneNumber
+            });
+          })
+      ).subscribe();
       }
     );
+
   }
 
   onSubmit(form: NgForm) {
     const value = form.value;
-    let newOwner: OwnerModel = {
-      id: form.value.id,
-      name: form.value.name,
-      surname: form.value.surname,
-      phoneNumber: form.value.phoneNumber,
-    }
 
-    // if (this.editMode) {
-    //   this.ownerListService.updateOwner(this.editedOwnerId, newOwner);
-    // } else {
-    //   this.ownerListService.addOwner(newOwner);
-    // }
+    if (this.editMode) {
+      let updatedOwner: OwnerModel = {
+        id: form.value.id,
+        name: form.value.name,
+        surname: form.value.surname,
+        phoneNumber: form.value.phoneNumber,
+      }
+
+      this.ownerListService.updateOwner(updatedOwner).subscribe();
+
+    } else {
+      let newOwner = {
+        name: form.value.name,
+        surname: form.value.surname,
+        phoneNumber: form.value.phoneNumber,
+      }
+      this.ownerListService.addOwner(newOwner).subscribe();
+    }
+    window.location.reload();
     this.editMode = false;
     form.reset();
   }
@@ -71,8 +78,9 @@ export class OwnerEditComponent implements OnInit {
   }
 
   onDelete() {
-    // this.ownerListService.deleteOwner(this.editedOwnerId);
-    this.onClear();
+    if(this.editedOwnerId)
+    this.ownerListService.deleteOwner(this.editedOwnerId).subscribe();
+    window.location.reload();
   }
 
   ngOnDestroy() {

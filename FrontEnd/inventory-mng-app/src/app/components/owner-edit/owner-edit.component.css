@@ -57,6 +57,6 @@
   cursor: default;
 }
 
-.title:hover {
-  text-shadow: 2px 2px #547e57;
+label {
+  font-weight: 600;
 }

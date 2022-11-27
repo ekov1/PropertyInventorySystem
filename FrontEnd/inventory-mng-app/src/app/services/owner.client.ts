@@ -14,10 +14,9 @@ export class OwnerClient {
 
   constructor(private http: HttpClient) { }
 
-  //TODO:
-  public getOwnerById(ownerId: string): Observable<OwnerDto> {
+  public getOwnerById(id: string): Observable<OwnerDto> {
     return this.http.get<OwnerDto>(
-      this.apiURL + + ownerId
+      this.apiURL + '/GetById/' + id
     );
   }
 
@@ -35,7 +34,7 @@ export class OwnerClient {
   }
 
   public updateOwner(updateOwnerTemplate: UpdateOwnerRestTemplate): Observable<OwnerDto> {
-    return this.http.post<OwnerDto>(
+    return this.http.put<OwnerDto>(
       this.apiURL,
       updateOwnerTemplate
     );
@@ -43,7 +42,7 @@ export class OwnerClient {
 
   public deleteOwner(id: string): Observable<OwnerDto> {
     return this.http.delete<OwnerDto>(
-      this.apiURL
+      this.apiURL + '/' + id
     );
   }
 }

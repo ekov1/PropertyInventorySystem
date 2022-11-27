@@ -1,4 +1,5 @@
 ﻿using API.Mappers;
+using Microsoft.AspNetCore.Cors;
 using Microsoft.AspNetCore.Mvc;
 using Models.Requests;
 using Services.Interfaces;
@@ -7,6 +8,7 @@ namespace API.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
+    [EnableCors("corsPolicy")]
     public class OwnerController : ControllerBase
     {
         private readonly IOwnerService _ownerService;
@@ -38,12 +40,13 @@ namespace API.Controllers
         }
 
         [HttpDelete]
-        public ActionResult DeleteOwner(Guid ownerId)
+        [Route("{id:Guid}")]
+        public ActionResult DeleteOwner(Guid id)
         {
-            if (!this._ownerService.OwnerExists(ownerId))
+            if (!this._ownerService.OwnerExists(id))
                 return NotFound("Wrong id.");
 
-            this._ownerService.Delete(ownerId);
+            this._ownerService.Delete(id);
             return Ok();
         }
 
@@ -54,18 +57,18 @@ namespace API.Controllers
             return Ok(owners);
         }
 
-        //[HttpGet]
-        //[Route("GetById/{id}")]
-        //public IActionResult GetAll(Guid ownerId)
-        //{
-        //    var owner = _ownerService.GetById(ownerId);
+        [HttpGet]
+        [Route("GetById/{id:Guid}")]
+        public IActionResult GetAll(Guid id)
+        {
+            var owner = _ownerService.GetById(id);
 
-        //    if (owner == null)
-        //    {
-        //        return NotFound("Owner is not found.");
-        //    }
+            if (owner == null)
+            {
+                return NotFound("Owner is not found.");
+            }
 
-        //    return Ok(owner);
-        //}
+            return Ok(owner);
+        }
     }
 }
